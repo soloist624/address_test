@@ -1,4 +1,16 @@
-.App {
+.intro_button {
+  background-color: #f66355 !important;
+  box-shadow: 0 2px 6px rgba(246, 99, 85, .24) !important;
+  border-radius: 6px !important;
+  color: #000 !important;
+  padding: 12px !important;
+  font-size: 16px !important;
+  margin-top: 32px !important;
+  margin-bottom: 10px !important;
+  font-weight: bold;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +47,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
