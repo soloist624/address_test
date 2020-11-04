@@ -15,9 +15,78 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: start;
-  flex-grow: 1
+  padding: 0 16px 60px;
 }
 
+.home__book__footer-container {
+  background-color: #F9FAFB;
+  bottom: 0;
+      box-shadow: 0 -1px 4px rgba(18, 25, 33, .08),
+      0 4px 12px rgba(18, 25, 33, .04);
+  padding: 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+}
+
+.home__book__confirm-btn {
+      background-color: #121921;
+      box-shadow: 0 2px 6px rgba(18, 25, 33, .16);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: 0;
+      width: 100%;
+      padding: 12px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+}
+
+.home__book-title{
+  margin-top: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.home__book-alert{
+  color: #f66355;
+  font-size: 12px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.home__book-scroll{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 2px;
+  padding-bottom: 14px;
+}
+
+.home__book-time-table__header {
+  color: rgba(0, 0, 0, .6);
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.home__book-time-table__container {
+  margin: 34px 0 30px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  flex-direction: row-reverse;
+}
 /* .App {
   text-align: center;
 }
@@ -54,5 +123,11 @@
   }
   to {
     transform: rotate(360deg);
+  }
+} */
+
+/* @media only screen and (max-width: 600px) {
+  .home__modal-content {
+    width: 200px;
   }
 } */

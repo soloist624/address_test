@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: start;
-  flex-grow: 1
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .modal__header {
@@ -13,7 +14,6 @@
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  direction: rtl;
 }
 
 .modal__header--title {
@@ -35,14 +35,19 @@
 
 .modal__content {
   width: 600px;
+  max-height: 80vh;
+  overflow-y: hidden;
   outline: none;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  top: 20%;
   background-color: white;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.modal__content-scroller {
+  overflow-y: scroll;
 }
 
 .modal__overlay {
@@ -54,7 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .ReactModalPortal .ReactModal__Overlay {

@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import CustomModal from './components/CustomModal';
+import BookDay from './components/BookDay';
+import BookTime from './components/BookTime';
 import {visitSchedule} from './services/Endpoints';
 import './assets/styles/App.css';
 
@@ -73,21 +75,87 @@ function App() {
             isOpen={isModalOpen}
             onCloseButton={onCloseModal}
             title="هماهنگی بازدید">
-            <div className="home__modal-content">
-              <p>
-                some sample text is here
+            <div className="sdf">
+              <div className="home__modal-content">
+              <p className="home__book-title">
+              برای هماهنگی بازدید، روز و ساعت را انتخاب کنید.
               </p>
-              <button className="intro_button" >دکمه الکی</button>
-              <p>
-                یکمی هم از متن تصنعی لورم ایپسوم
+              <div className="home__book-scroll">
+                <BookDay isActive/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay/>
+                <BookDay isActive/>
+                <BookDay/>
+              </div>
+              <p className="home__book-alert">
+                با انتخاب نزدیک‌ترین روز برای بازدید، شانس بیشتری در اجاره خانه خواهید داشت.
               </p>
+              <p className="home__book-time-table__header">انتخاب زمان</p>
+              <div className="home__book-time-table__container">
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+                <BookTime isActive/>
+              </div>
+              <div className="home__book__footer-container">
+                <button className="home__book__confirm-btn">امروز ساعت ۱۸:۳۰ هماهنگ کن!</button>
+              </div>
+            </div>
             </div>
           </CustomModal>
         </div>
       )
     }
 
-  return (
+  return (    
     <>
       {decideByStatus()}
     </>

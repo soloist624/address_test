@@ -19,7 +19,9 @@ const CustomModal = (props) => {
                 <span className="modal__header--close" onClick={props.onCloseButton}>&#10006;</span>
                 <span className="modal__header--title">{props.title}</span>
             </div>
-                {props.children}
+                <div className="modal__content-scroller">
+                    {props.children}
+                </div>
             </div>
         </ReactModal>
     );
