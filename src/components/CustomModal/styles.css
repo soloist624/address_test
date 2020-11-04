@@ -1,0 +1,79 @@
+.modal__root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  flex-grow: 1
+}
+
+.modal__header {
+  padding: 12px;
+  border-bottom: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  direction: rtl;
+}
+
+.modal__header--title {
+  margin-right: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.modal__header--close {
+  border-radius: 50%;
+  background-color: rgba(18, 25, 33, 0.06);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal__content {
+  width: 600px;
+  outline: none;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  top: 20%;
+  background-color: white;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: opacity 300ms ease-in-out;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal__content {
+    width: 100%;
+  }
+}

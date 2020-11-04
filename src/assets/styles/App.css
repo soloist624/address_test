@@ -10,6 +10,14 @@
   font-weight: bold;
 }
 
+.home__modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: start;
+  flex-grow: 1
+}
+
 /* .App {
   text-align: center;
 }
