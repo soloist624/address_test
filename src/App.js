@@ -3,6 +3,7 @@ import CustomModal from './components/CustomModal';
 import BookDay from './components/BookDay';
 import BookTime from './components/BookTime';
 import {visitSchedule} from './services/Endpoints';
+import dateTimeFormatter, {dayInfoExtractor} from './utils/date';
 import './assets/styles/App.css';
 
 function App() {
@@ -10,6 +11,8 @@ function App() {
   const [isModalOpen, setModalOpen] = useState(false)
   const [isLoaded, setLoaded] = useState(false)
   const [data, setData] = useState(undefined)
+  const [selectedDay, setSelectedDay] = useState(undefined)
+  const [selectedTime, setSelectedTime] = useState(undefined)
   
   useEffect(() => {
     if (!isLoaded){
@@ -24,11 +27,34 @@ function App() {
       })
       .then(res => {
         if (res.status === 200){
-          setData(res.data)
+          
+          const processedDateTimes = res.data.data.map(el => dateTimeFormatter(el))
+          let groupedDateTimes = processedDateTimes.reduce((acc, cur) => {
+            if (acc.hasOwnProperty(cur.date)) {
+              acc[cur.date].times.push(cur)
+            }
+            else {
+              acc[cur.date] = {times: [cur]}
+            }
+            return acc
+          }, {})
+          // console.log("groupedDateTimes", groupedDateTimes);
+          
+          groupedDateTimes = Object.keys(groupedDateTimes).map(el => ({
+            ...groupedDateTimes[el],
+            dayInfo: dayInfoExtractor(groupedDateTimes[el].times[0].raw),
+            tag: el
+          }))
+          // console.log("groupedDateTimes", groupedDateTimes);
+          
+          setSelectedDay(groupedDateTimes[Object.keys(groupedDateTimes)[0]])
+          setData(groupedDateTimes)
         }
         setLoaded(true)
       })
       .catch(err => {
+        // console.log(err);
+        
         setLoaded(true)
       })
     }
@@ -65,6 +91,35 @@ function App() {
       setLoaded(false)
     }
 
+    const onDayClick = (day) => {
+      if (day.tag !== selectedDay.tag){
+        setSelectedDay(day)
+        setSelectedTime(undefined)
+      }
+    }
+
+    const onTimeClick = (time) => {
+      setSelectedTime(time)
+    }
+
+    const buttonTextGenerator = () => {
+      let theDay = ""
+      if (selectedDay.dayInfo.dif === 0){
+        theDay = "امروز"
+      }
+      else if (selectedDay.dayInfo.dif === 1) {
+        theDay = "فردا"
+      }
+      else {
+        theDay = selectedDay.dayInfo.weekDay
+      }
+      return `${theDay} ساعت ${selectedTime.time} هماهنگ کن!`
+    }
+
+    const onScheduleClicked = () => {
+      console.log(selectedTime)
+    }
+
     const renderContent = () => {
 
       return (
@@ -81,73 +136,32 @@ function App() {
               برای هماهنگی بازدید، روز و ساعت را انتخاب کنید.
               </p>
               <div className="home__book-scroll">
-                <BookDay isActive/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay/>
-                <BookDay isActive/>
-                <BookDay/>
+              {data.map(el => (
+                <BookDay key={el.tag} dayInfo={el.dayInfo} isActive={selectedDay.tag === el.tag} onDayClick={onDayClick.bind(this, el)}/>
+              ))}
               </div>
-              <p className="home__book-alert">
-                با انتخاب نزدیک‌ترین روز برای بازدید، شانس بیشتری در اجاره خانه خواهید داشت.
-              </p>
+              {
+                selectedDay.dayInfo.dif > 1 ? (
+                  <p className="home__book-alert">
+                    با انتخاب نزدیک‌ترین روز برای بازدید، شانس بیشتری در اجاره خانه خواهید داشت.
+                  </p>
+                ) : (undefined)
+              }
               <p className="home__book-time-table__header">انتخاب زمان</p>
               <div className="home__book-time-table__container">
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
-                <BookTime isActive/>
+                {
+                  selectedDay.times.map(el => (
+                    <BookTime key={el.raw} timeInfo={el.time} isActive={!!selectedTime && selectedTime.raw === el.raw} onTimeClick={onTimeClick.bind(this, el)}/>
+                  ))
+                }
               </div>
-              <div className="home__book__footer-container">
-                <button className="home__book__confirm-btn">امروز ساعت ۱۸:۳۰ هماهنگ کن!</button>
-              </div>
+              {
+                !!selectedTime ? (
+                  <div className="home__book__footer-container">
+                    <button className="home__book__confirm-btn" onClick={onScheduleClicked}>{buttonTextGenerator()}</button>
+                  </div>
+                ) : (undefined)
+              }
             </div>
             </div>
           </CustomModal>
