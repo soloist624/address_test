@@ -52,7 +52,7 @@
 
 .modal__overlay {
   position: fixed;
-  top: 0;
+  top: -70px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -66,15 +66,22 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  opacity: 0;
+  transform: translate3d(0px, 70px, 0px);
   transition: opacity 300ms ease-in-out;
+  transition-property: all;
+  transition-duration: 300ms;
 }
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
   opacity: 1;
+  transform: translate3d(0px, 0px, 0px)
 }
 
 .ReactModalPortal .ReactModal__Overlay--before-close {
   opacity: 0;
+  transform: translate3d(0px, 70px, 0px)
+  
 }
 
 @media only screen and (max-width: 600px) {
